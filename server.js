@@ -22,7 +22,7 @@ const csrf = require('csurf');
 const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware');
 
 // app.use(helmet()); // helmet começou a causar problemas no localhost por conta da falta de SSL
-
+const port = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
@@ -51,7 +51,7 @@ app.use(csrfMiddleware);
 app.use(routes);
 
 app.on('pronto', () => {
-  app.listen(3000, () => {
+  app.listen(port, () => {
     console.log('Acessar http://localhost:3000');
     console.log('Servidor executando na porta 3000');
   });
